@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="library" method="upgrade" version="3.0">
+	<name>DSCFork Library</name>
+	<libraryname>dscfork</libraryname>
+	<author>Gerald R. Zalsos</author>
+	<creationDate>June 2012</creationDate>
+	<copyright>Copyright (C) 2015 klaraontheweb.com All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later</license>
+	<authorEmail>info@klaraontheweb.com</authorEmail>
+	<authorUrl>www.klaraontheweb.com</authorUrl>
+	<version>4.0.0</version>
+	<description>Fork of Dioscouri Library, @see https://github.com/dioscouri/library</description>
+	<files>		
+		<folder>component</folder>
+		<folder>highroller</folder>
+		<folder>library</folder>
+		<folder>tools</folder>
+		<file>dscfork.php</file>
+		<file>loader.php</file>
+	</files>
+	<languages folder="language">
+		<language tag="en-GB">en-GB/en-GB.lib_dscfork.ini</language>
+	</languages>
+
+	<!-- Media -->
+	<media destination="dscfork" folder="media">
+		<folder>css</folder>		
+		<folder>images</folder>
+		<folder>js</folder>		
+		<file>index.html</file>
+	</media>
+	<updateservers>
+		<server type="extension" priority="1" name="DSCFork Library Updates">http://updates.klaraontheweb.com/library/updates.xml</server>
+	</updateservers>
+
+</extension>
