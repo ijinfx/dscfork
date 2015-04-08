@@ -75,7 +75,7 @@ class DSCForkQuery extends JObject
 	public function delete( )
 	{
 		$this->_type = 'delete';
-		$this->_delete = new DSCQueryElement( 'DELETE', array( ), '' );
+		$this->_delete = new DSCForkQueryElement( 'DELETE', array( ), '' );
 		return $this;
 	}
 

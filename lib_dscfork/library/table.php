@@ -38,7 +38,7 @@ class DSCForkTable extends JTable
 	{
 		$query = "LOCK TABLES {$this->_tbl} WRITE;";
 		$this->_db->setQuery( $query );
-		$this->_db->query( );
+		$this->_db->execute( );
 
 		if( $this->_db->getErrorNum( ) )
 		{
@@ -57,7 +57,7 @@ class DSCForkTable extends JTable
 	{
 		$query = "UNLOCK TABLES;";
 		$this->_db->setQuery( $query );
-		$this->_db->query( );
+		$this->_db->execute( );
 
 		if( $this->_db->getErrorNum( ) )
 		{
@@ -360,7 +360,7 @@ class DSCForkTable extends JTable
 			}
 
 			$this->_db->setQuery( $query );
-			if( !$this->_db->query( ) )
+			if( !$this->_db->execute( ) )
 			{
 				$err = $this->_db->getErrorMsg( );
 				JError::raiseError( 500, $err );

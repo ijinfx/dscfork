@@ -9,7 +9,15 @@
 	<authorEmail>info@klaraontheweb.com</authorEmail>
 	<authorUrl>www.klaraontheweb.com</authorUrl>
 	<version>4.0.0</version>
-	<description>Fork of Dioscouri Library, @see https://github.com/dioscouri/library</description>
+	<description>
+	<![CDATA[
+	<div class="alert alert-info text-left">
+		<h4>DSCFork Library</h4>
+		<p>Fork of Dioscouri Library, @see https://github.com/dioscouri/library</p>
+	</div>	
+	]]>		
+	</description>
+	
 	<files>		
 		<folder>component</folder>
 		<folder>highroller</folder>

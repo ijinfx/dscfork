@@ -160,7 +160,7 @@ class DSCForkMenu
 			$com_template_path = $base . '/components/com_' . $app->getName( ) . '/views/dashboard/tmpl';
 			$template_path = $base . '/templates/' . $template . '/html/com_' . $app->getName( ) . '/dashboard';
 
-			$view = new DSCForkViewBase( array( 'name' => 'dashboard', 'template_path' => $lib_path ) );
+			$view = new DSCForkView( array( 'name' => 'dashboard', 'template_path' => $lib_path ) );
 
 			$view->set( 'items', $items );
 			$view->set( 'name', $name );

@@ -234,7 +234,7 @@ class DSCForkTableNested extends DSCForkTable
 				WHERE `rgt` >= '{$rgt}'
 			";
 			$database->setQuery( $query );
-			if( !$database->query( ) )
+			if( !$database->execute( ) )
 			{
 				$this->setError( $database->getErrorMsg( ) );
 				$this->_unlock( );
@@ -249,7 +249,7 @@ class DSCForkTableNested extends DSCForkTable
 			";
 			$database->setQuery( $query );
 
-			if( !$database->query( ) )
+			if( !$database->execute( ) )
 			{
 				$this->setError( $database->getErrorMsg( ) );
 				$this->_unlock( );
@@ -272,7 +272,7 @@ class DSCForkTableNested extends DSCForkTable
 				WHERE `rgt` > '{$lft}'
 			";
 			$database->setQuery( $query );
-			if( !$database->query( ) )
+			if( !$database->execute( ) )
 			{
 				$this->setError( $database->getErrorMsg( ) );
 				$this->_unlock( );
@@ -287,7 +287,7 @@ class DSCForkTableNested extends DSCForkTable
 			";
 			$database->setQuery( $query );
 
-			if( !$database->query( ) )
+			if( !$database->execute( ) )
 			{
 				$this->setError( $database->getErrorMsg( ) );
 				$this->_unlock( );
@@ -379,7 +379,7 @@ class DSCForkTableNested extends DSCForkTable
 				`lft` BETWEEN '{$this->lft}' AND '{$this->rgt}';
 		";
 		$database->setQuery( $query );
-		if( !$database->query( ) )
+		if( !$database->execute( ) )
 		{
 			$this->setError( $database->getErrorMsg( ) );
 			$this->_unlock( );
@@ -396,7 +396,7 @@ class DSCForkTableNested extends DSCForkTable
 				`rgt` > '{$this->rgt}'
 		";
 		$database->setQuery( $query );
-		if( !$database->query( ) )
+		if( !$database->execute( ) )
 		{
 			$this->setError( $database->getErrorMsg( ) );
 			$this->_unlock( );
@@ -410,7 +410,7 @@ class DSCForkTableNested extends DSCForkTable
 			WHERE `lft` > '{$this->rgt}'
 		";
 		$database->setQuery( $query );
-		if( !$database->query( ) )
+		if( !$database->execute( ) )
 		{
 			$this->setError( $database->getErrorMsg( ) );
 			$this->_unlock( );
@@ -566,7 +566,7 @@ class DSCForkTableNested extends DSCForkTable
 				`{$key}` = '{$parent}'
 		";
 		$database->setQuery( $query );
-		if( !$database->query( ) )
+		if( !$database->execute( ) )
 		{
 			$this->setError( $database->getErrorMsg( ) );
 			$this->_unlock( );
@@ -722,7 +722,7 @@ class DSCForkTableNested extends DSCForkTable
 
 		// Shift left and right values for the node and it's children.
 		$this->_db->setQuery( 'UPDATE `' . $this->_tbl . '`' . ' SET `lft` = `lft` - ' . (int)$sibling->_width . ', `rgt` = `rgt` - ' . (int)$sibling->_width . '' . ' WHERE `lft` BETWEEN ' . (int)$node->lft . ' AND ' . (int)$node->rgt );
-		$this->_db->query( );
+		$this->_db->execute( );
 
 		if( $this->_db->getErrorNum( ) )
 		{
@@ -733,7 +733,7 @@ class DSCForkTableNested extends DSCForkTable
 
 		// Shift left and right values for the sibling and it's children
 		$this->_db->setQuery( 'UPDATE `' . $this->_tbl . '`' . ' SET `lft` = `lft` + ' . (int)$node->_width . ', `rgt` = `rgt` + ' . (int)$node->_width . ' WHERE `lft` BETWEEN ' . (int)$sibling->lft . ' AND ' . (int)$sibling->rgt . ' AND `' . $this->_tbl_key . '` NOT IN (' . implode( ',', $children ) . ')' );
-		$this->_db->query( );
+		$this->_db->execute( );
 
 		// Check for a database error.
 		if( $this->_db->getErrorNum( ) )
@@ -805,7 +805,7 @@ class DSCForkTableNested extends DSCForkTable
 
 		// Shift left and right values for the node and it's children.
 		$this->_db->setQuery( 'UPDATE `' . $this->_tbl . '`' . ' SET `lft` = `lft` + ' . (int)$sibling->_width . ', `rgt` = `rgt` + ' . (int)$sibling->_width . '' . ' WHERE `lft` BETWEEN ' . (int)$node->lft . ' AND ' . (int)$node->rgt );
-		$this->_db->query( );
+		$this->_db->execute( );
 
 		// Check for a database error.
 		if( $this->_db->getErrorNum( ) )
@@ -817,7 +817,7 @@ class DSCForkTableNested extends DSCForkTable
 
 		// Shift left and right values for the sibling and it's children.
 		$this->_db->setQuery( 'UPDATE `' . $this->_tbl . '`' . ' SET `lft` = `lft` - ' . (int)$node->_width . ', `rgt` = `rgt` - ' . (int)$node->_width . ' WHERE `lft` BETWEEN ' . (int)$sibling->lft . ' AND ' . (int)$sibling->rgt . ' AND `' . $this->_tbl_key . '` NOT IN (' . implode( ',', $children ) . ')' );
-		$this->_db->query( );
+		$this->_db->execute( );
 
 		// Check for a database error.
 		if( $this->_db->getErrorNum( ) )
@@ -898,7 +898,7 @@ class DSCForkTableNested extends DSCForkTable
 				tbl.{$this->getKeyName()} IN ('" . implode( "', '", $children ) . "')
         ";
 		$database->setQuery( $query );
-		$database->query( );
+		$database->execute( );
 
 		// UPDATE indexTable
 		// SET lft = lft + $adjust
@@ -912,7 +912,7 @@ class DSCForkTableNested extends DSCForkTable
 				tbl.{$this->getKeyName()} IN ('" . implode( "', '", $children ) . "')
         ";
 		$database->setQuery( $query );
-		$database->query( );
+		$database->execute( );
 
 		// unlock the table for writing
 		$this->_unlock( );
@@ -951,7 +951,7 @@ class DSCForkTableNested extends DSCForkTable
 			$query .= "AND tbl.{$this->getKeyName()} NOT IN ('" . implode( "', '", $excludedIds ) . "')";
 		}
 		$database->setQuery( $query );
-		$database->query( );
+		$database->execute( );
 
 		// Move all the left values + $width for nodes where the the right value >=
 		// the parent left value
@@ -971,7 +971,7 @@ class DSCForkTableNested extends DSCForkTable
 			$query .= "AND tbl.{$this->getKeyName()} NOT IN ('" . implode( "', '", $excludedIds ) . "')";
 		}
 		$database->setQuery( $query );
-		$database->query( );
+		$database->execute( );
 	}
 
 	/**
@@ -998,7 +998,7 @@ class DSCForkTableNested extends DSCForkTable
 				tbl.rgt > {$right}
         ";
 		$database->setQuery( $query );
-		$database->query( );
+		$database->execute( );
 
 		// Move all the right values + $width for nodes where the the left
 		// value > the parent right value
@@ -1014,7 +1014,7 @@ class DSCForkTableNested extends DSCForkTable
 				tbl.lft > {$right}
         ";
 		$database->setQuery( $query );
-		$database->query( );
+		$database->execute( );
 	}
 
 	/**
@@ -1085,7 +1085,7 @@ class DSCForkTableNested extends DSCForkTable
 					$orders[ $i ]->ordering = $i + 1;
 					$query = 'UPDATE ' . $this->_tbl . ' SET ordering = ' . (int)$orders[ $i ]->ordering . ' WHERE ' . $k . ' = ' . $this->_db->Quote( $orders[ $i ]->$k );
 					$this->_db->setQuery( $query );
-					if( !$this->_db->query( ) )
+					if( !$this->_db->execute( ) )
 					{
 						$this->setError( $this->_db->getErrorMsg( ) );
 					}

@@ -1,6 +1,6 @@
 <?php
 defined( '_JEXEC' ) or die( 'Restricted access' );
-JHTML::_( 'stylesheet', 'menu.css', 'media/com_s/css/' );
+JHTML::_( 'stylesheet', 'menu.css', 'media/com_sample/css/' );
 ?>
 <div id="<?php echo $this->name; ?>" class="submenu">
 	

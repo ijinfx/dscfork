@@ -226,10 +226,7 @@ class DSCForkModel extends JModelLegacy
 			$cache->setCaching( $this->cache_enabled );
 			$cache->setLifeTime( $this->cache_lifetime );
 			$list = $cache->get( $cache_key );
-			if( !version_compare( JVERSION, '1.6.0', 'ge' ) )
-			{
-				$list = unserialize( trim( $list ) );
-			}
+			
 			if( !$list || $refresh )
 			{
 				$query = $this->getQuery( $refresh );
@@ -247,15 +244,7 @@ class DSCForkModel extends JModelLegacy
 					$this->prepareItem( $item, $key, $refresh );
 				}
 
-				if( version_compare( JVERSION, '1.6.0', 'ge' ) )
-				{
-					// joomla! 1.6+ code here
-					$cache->store( $list, $cache_key );
-				} else
-				{
-					// Joomla! 1.5 code here
-					$cache->store( serialize( $list ), $cache_key );
-				}
+				$cache->store( $list, $cache_key );
 			}
 
 			$this->_list = $list;
@@ -389,7 +378,7 @@ class DSCForkModel extends JModelLegacy
         	) x WHERE x.$key = '$id';
         	";
 		$db->setQuery( $q2 );
-		$db->query( );
+		$db->execute( );
 
 		/*
 		 $q2_5 = "SELECT @midpoint;
@@ -536,8 +525,8 @@ class DSCForkModel extends JModelLegacy
 		if( empty( $this->_id ) )
 		{
 			$input = JFactory::getApplication( )->input;
-			$id = $input->post->getInt( 'id', $input->get->getInt( 'id', '0' ) );
-			$array = $input->post->getArray( 'cid', array( $id ) );
+			$id = $input->post->getInt( 'id', $input->getInt( 'id', '0' ) );
+			$array = $input->post->get('cid', array($id), 'array');
 			$this->setId( (int)$array[ 0 ] );
 		}
 

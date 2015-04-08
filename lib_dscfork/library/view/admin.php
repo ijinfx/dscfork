@@ -28,7 +28,7 @@ class DSCForkViewAdmin extends DSCForkView
 	 */
 	public function display( $tpl = null )
 	{
-		JHTML::_( 'stylesheet', 'admin.css', 'media/' . $this->_option . '/css/' );
+		//JHTML::_( 'stylesheet', 'admin.css', 'media/' . $this->_option . '/css/' );
 
 		$this->getLayoutVars( $tpl );
 
@@ -192,19 +192,19 @@ class DSCForkViewAdmin extends DSCForkView
 		if ( !empty( $surrounding['prev'] ) )
 		{
 			$divider = true;
-			JToolBarHelper::custom( 'saveprev', "saveprev", "saveprev", JText::_( 'LIB_DSCFORK_SAVE_AND_PREV' ), false );
+			JToolBarHelper::custom( 'saveprev', "previous", "previous", JText::_( 'LIB_DSCFORK_SAVE_AND_PREV' ), false );
 		}
 		if ( !empty( $surrounding['next'] ) )
 		{
 			$divider = true;
-			JToolBarHelper::custom( 'savenext', "savenext", "savenext", JText::_( 'LIB_DSCFORK_SAVE_AND_NEXT' ), false );
+			JToolBarHelper::custom( 'savenext', "next", "next", JText::_( 'LIB_DSCFORK_SAVE_AND_NEXT' ), false );
 		}
 		if ( $divider )
 		{
 			JToolBarHelper::divider( );
 		}
 
-		JToolBarHelper::custom( 'savenew', "savenew", "savenew", JText::_( 'LIB_DSCFORK_SAVE_AND_NEW' ), false );
+		JToolBarHelper::custom( 'savenew', "save-new", "save-new", JText::_( 'LIB_DSCFORK_SAVE_AND_NEW' ), false );
 		JToolBarHelper::save( 'save' );
 		JToolBarHelper::apply( 'apply' );
 

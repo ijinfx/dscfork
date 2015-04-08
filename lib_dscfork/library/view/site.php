@@ -49,14 +49,6 @@ class DSCForkViewSite extends DSCForkView
 			//TODO: make it a sidemenu
 		}
 
-		$app = DSCFork::getApp( )->getnName( );
-
-		$config = $app::getInstance( );
-		if ( $config->get( 'include_site_css', '1' ) )
-		{
-			JHTML::_( 'stylesheet', 'site.css', 'media/' . $this->_option . '/css/' );
-		}
-
 		parent::display( $tpl );
 	}
 

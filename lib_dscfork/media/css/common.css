@@ -29,6 +29,23 @@
 	width: 48.5%;
 }
 
+.dscfork-clearfix {
+	*zoom: 1;
+}
+
+.dscfork-clearfix:before, 
+.dscfork-clearfix:after {
+	display: table;
+	content: "";
+	line-height: 0;
+}
+
+
+
+.dscfork-clearfix:after {
+	clear: both;
+}
+
 .dscfork-flat li {
 	float: left;
 }
@@ -121,6 +138,82 @@ p.dscfork-tip {
 	display: none;
 }
 
+#dscfork-container .dscfork-pad-none {
+	padding: 0;
+}
+
+#dscfork-container .dscfork-margin-none {
+	margin: 0;
+}
+
+#dscfork-container .dscfork-header::before, #dscfork-container .dscfork-header::after {
+    content: "";
+    display: table;
+    line-height: 0;
+}
+
+#dscfork-container .dscfork-header::after {
+    clear: both;
+}
+
+
+#dscfork-container .dscfork-header {
+	background: none repeat scroll 0 0 #1e5d87;
+    border: 0 none;   
+    box-shadow: none;
+    margin: 0;
+    min-height: 50px;
+    padding-left: 0;
+    padding-right: 0;
+    position: relative;
+}
+
+#dscfork-container h2.app-title {
+    font-size: 26px;
+    font-weight: normal;
+}
+
+#dscfork-container .dscfork-logo img.app-logo {
+    height: 40px;
+    padding: 10px 0;
+    width: auto;
+}
+
+#dscfork-container div.container-fluid div.container-inner {
+	padding: 0 10px;
+}
+
+div.container-fluid {
+   /* padding-left: 0;
+    padding-right: 0;*/
+}
+
+#dscfork-container div.dscfork-main {
+	background: none repeat scroll 0 0 #fcfcfc;
+    padding: 12px 20px 24px;
+    position: relative;
+}
+
+#dscfork-container .app-header {
+	border-bottom: 1px solid #eee;
+}
+
+#dscfork-container .dscfork-main .app-header:first-child {
+    margin: 0 0 12px;
+}
+
+.dscfork-admin-wrapper {
+	position: relative;
+}
+
+#dscfork-container .dscfork-main {
+    margin-left: 190px;
+    margin-right: 0;
+    margin-top: 0;
+    min-height: 100%;
+    padding: 0;
+}
+
 /*-------------------------------------------
  Self-clearing Floats
  -------------------------------------------*/
@@ -135,4 +228,62 @@ p.dscfork-tip {
 
 .dscfork-clear, .dscfork-wrap, .dscfork-flat {
 	zoom: 1;
+}
+
+/**
+ * 	Button toolbar override
+ */
+#dscfork-container #toolbar.btn-toolbar .btn{
+	background: none repeat scroll 0 0 #F8F8F8 !important;
+    border: 1px solid #DDDDDD !important;
+    padding: 3px 12px !important;
+    color: #000 !important;
+}
+
+#dscfork-container #toolbar.btn-toolbar .btn:hover{
+	background: none repeat scroll 0 0 #EEEEEE !important;
+}
+
+/* button success*/
+#dscfork-container #toolbar.btn-toolbar .btn.btn-success{
+	background: none repeat scroll 0 0 #87B87F !important;
+    border: 1px solid #87B87F !important;
+    padding: 4px 12px !important;
+    line-height: 21px !important;
+    color: #fff !important;
+}
+
+#js-cpanel #toolbar.btn-toolbar .btn.btn-success:hover{
+	background: none repeat scroll 0 0 #629B58 !important;
+}
+
+/*save button*/
+#dscfork-container #toolbar #toolbar-save .btn, 
+#dscfork-container #toolbar-save .btn {
+    background: none repeat scroll 0 0 #87B87F !important;
+    border: 1px solid #87B87F !important;
+    color: #FFFFFF !important;
+    text-shadow: none !important;
+}
+#dscfork-container #toolbar #toolbar-save .btn:hover, 
+#dscfork-container #toolbar-save .btn:hover{
+	background: none repeat scroll 0 0 #629B58 !important;
+}
+
+/* button icons */
+.icon-save:before, 
+.icon-save-copy:before, 
+.btn-toolbar .icon-copy:before{
+	color: #fff !important;
+}
+.icon-publish:before{
+	color: #359BED !important;
+}
+
+/* button exceptions*/
+div#status{
+	box-shadow: none !important;
+}
+.icon-delete:before{
+	color: #BD362F !important;
 }

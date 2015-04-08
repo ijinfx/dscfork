@@ -118,7 +118,7 @@ class DSCForkTableXref extends DSCForkTable
 
 		$db->setQuery( (string)$query );
 
-		if( $db->query( ) )
+		if( $db->execute( ) )
 		{
 			$dispatcher = JDispatcher::getInstance( );
 			$dispatcher->trigger( 'onAfterDelete' . $this->get( '_suffix' ), array( $this, $oid ) );
@@ -141,7 +141,7 @@ class DSCForkTableXref extends DSCForkTable
 	function insertObject( )
 	{
 		$table = $this->getTableName( );
-		$fmtsql = 'INSERT INTO ' . $this->_db->nameQuote( $table ) . ' ( %s ) VALUES ( %s ) ';
+		$fmtsql = 'INSERT INTO ' . $this->_db->quoteName( $table ) . ' ( %s ) VALUES ( %s ) ';
 		$fields = array( );
 		foreach( get_object_vars( $this ) as $k => $v )
 		{
@@ -154,11 +154,14 @@ class DSCForkTableXref extends DSCForkTable
 				// internal field
 				continue;
 			}
-			$fields[ ] = $this->_db->nameQuote( $k );
-			$values[ ] = $this->_db->isQuoted( $k ) ? $this->_db->Quote( $v ) : (int)$v;
+			$fields[ ] = $this->_db->quoteName( $k );
+			//$values[ ] = $this->_db->isQuoted( $k ) ? $this->_db->Quote( $v ) : (int)$v;
+			// method isQuoted is depreciated so we cast the values to int for now
+			// TODO: find a better way?
+			$values[ ] = (int)$v;
 		}
 		$this->_db->setQuery( sprintf( $fmtsql, implode( ",", $fields ), implode( ",", $values ) ) );
-		if( !$this->_db->query( ) )
+		if( !$this->_db->execute( ) )
 		{
 			$this->setError( $this->_db->getErrorMsg( ) );
 			return false;
@@ -175,7 +178,7 @@ class DSCForkTableXref extends DSCForkTable
 	function updateObject( $updateNulls = true )
 	{
 		$table = $this->getTableName( );
-		$fmtsql = 'UPDATE ' . $this->_db->nameQuote( $table ) . ' SET %s WHERE %s';
+		$fmtsql = 'UPDATE ' . $this->_db->quoteName( $table ) . ' SET %s WHERE %s';
 		$tmp = array( );
 		$where = array( );
 		foreach( get_object_vars( $this ) as $k => $v )
@@ -205,12 +208,16 @@ class DSCForkTableXref extends DSCForkTable
 				}
 			} else
 			{
-				$val = $this->_db->isQuoted( $k ) ? $this->_db->Quote( $v ) : (int)$v;
+				//$val = $this->_db->isQuoted( $k ) ? $this->_db->Quote( $v ) : (int)$v;
+				
+				// method isQuoted is depreciated so we cast the values to int for now
+				// TODO: find a better way?
+				$val = (int)$v;
 			}
-			$tmp[ ] = $this->_db->nameQuote( $k ) . '=' . $val;
+			$tmp[ ] = $this->_db->quoteName( $k ) . '=' . $val;
 		}
 		$this->_db->setQuery( sprintf( $fmtsql, implode( ",", $tmp ), implode( " AND ", $where ) ) );
-		if( !$this->_db->query( ) )
+		if( !$this->_db->execute( ) )
 		{
 			$this->setError( $this->_db->getErrorMsg( ) );
 			return false;

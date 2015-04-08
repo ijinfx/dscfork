@@ -7,7 +7,7 @@
 	<version>4.0.0</version>
 	<creationDate>June 2012</creationDate>
 	<copyright>Copyright (C) 2015 klaraontheweb.com All rights reserved.</copyright>
-	<license>NU General Public License version 2 or later</license>
+	<license>GNU General Public License version 2 or later</license>
 	<description>Adds the DSCFork Library to the Autoloader</description>
 	<files>
 		<filename plugin="dscfork">dscfork.php</filename>

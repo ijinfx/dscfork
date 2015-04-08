@@ -32,7 +32,7 @@ class DSCForkGrid extends JGrid
 		$index = intval( $direction == 'desc' );
 		$direction = ($direction == 'desc') ? 'asc' : 'desc';
 
-		$html = '<a href="javascript:dscgrid.gridOrdering(\'' . $order . '\',\'' . $direction . '\', ' . $form . ' );" title="' . JText::_( 'LIB_DSCFORK_CLICK_TO_SORT_BY_THIS_COLUMN' ) . '">';
+		$html = '<a href="javascript:dscfork.gridOrdering(\'' . $order . '\',\'' . $direction . '\', ' . $form . ' );" title="' . JText::_( 'LIB_DSCFORK_CLICK_TO_SORT_BY_THIS_COLUMN' ) . '">';
 		$html .= JText::_( $title );
 		if ( $order == $selected )
 		{
@@ -50,19 +50,16 @@ class DSCForkGrid extends JGrid
 	 *
 	 * @return  HTML
 	 */
-	public static function searchform( $value = '', $search = "Search", $reset = "Reset", $class = "unstyled dscfork-flat pad-left pull-right" )
+	public static function searchform( $value = '', $search = "Search", $reset = "Reset", $class = "dscfork-right dscfor-search" )
 	{
-		$html = '<ul class="' . $class . '">
-            <li>
-                <input class="search-query" type="text" name="filter" value="' . $value . '" />
-            </li>
-            <li>
-                <button class="btn btn-primary" onclick="this.form.submit();">' . $search . '</button>
-            </li>
-            <li>
-                <button class="btn btn-danger" onclick="dscfork.resetFormFilters(this.form);">' . $reset . '</button>
-            </li>
-        </ul>';
+         $html = '
+        <div class="input-append '.$class.'">
+	    	<input name="filter" value="'.$value.'" type="text" id="appendedInputButtons" class="input input-xlarge">
+	    	<button class="btn btn-primary" type="button" onclick="this.form.submit();"><i class="icon-search icon-white"></i> '.$search.'</button>
+	    	<button class="btn btn-danger" type="button" onclick="dscfork.resetFormFilters(this.form);"><i class="icon-refresh icon-white"></i> '.$reset.'</button>
+	    </div>
+	    <div class="dscfork-clear"></div>
+        ';
 
 		return $html;
 	}
@@ -157,7 +154,8 @@ class DSCForkGrid extends JGrid
 
 		return $href;
 	}
-
+	
+	//TODO: UPDATE to use <span class="btn btn-micro disabled"><i class="icon-publish"></i></span>
 	public static function enable( $enable, $i, $prefix = '', $imgY = 'tick.png', $imgX = 'publish_x.png' )
 	{
 		$img = $enable ? $imgY : $imgX;

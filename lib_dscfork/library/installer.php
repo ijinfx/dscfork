@@ -753,7 +753,7 @@ if ( !class_exists( 'DSCForkInstaller' ) )
 			}
 
 			$this->_db->setQuery( $qry_save );
-			$this->_db->query( );
+			$this->_db->execute( );
 		}
 
 		/**
@@ -800,12 +800,12 @@ if ( !class_exists( 'DSCForkInstaller' ) )
 						// publish the module
 						$query = "UPDATE #__extensions SET `enabled` = '1' WHERE `type` = 'module' AND `element` = '" . $manifestInformation["element"] . "'";
 						$this->_db->setQuery( $query );
-						$this->_db->query( );
+						$this->_db->execute( );
 
 						// display it on all pages
 						$query = "REPLACE #__modules_menu (`moduleid`, `menuid`) SELECT `id`, 0 FROM `#__modules` WHERE `module` = '" . $manifestInformation["element"] . "'";
 						$this->_db->setQuery( $query );
-						$this->_db->query( );
+						$this->_db->execute( );
 					}
 					break;
 				case "plugin":
@@ -1038,7 +1038,7 @@ if ( !class_exists( 'DSCForkInstaller' ) )
 						if ( $query != '' && $query{0} != '#' )
 						{
 							$db->setQuery( $query );
-							if ( !$db->query( ) )
+							if ( !$db->execute( ) )
 							{
 								JError::raiseWarning( 1, JText::sprintf( 'JLIB_INSTALLER_ERROR_SQL_ERROR', $db->stderr( true ) ) );
 								return false;

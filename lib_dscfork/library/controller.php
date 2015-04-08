@@ -19,6 +19,7 @@ class DSCForkController extends JControllerLegacy
 	 * default view
 	 */
 	public $default_view = 'dashboard';
+	public $show_footer = true;
 
 	/**
 	 * @var array() instances of Models to be used by the controller
@@ -160,7 +161,7 @@ class DSCForkController extends JControllerLegacy
 		$state['filter_id_from'] = $app->getUserStateFromRequest( $ns . 'filter_id_from', 'filter_id_from', '', '' );
 		$state['filter_id_to'] = $app->getUserStateFromRequest( $ns . 'filter_id_to', 'filter_id_to', '', '' );
 		$state['filter_name'] = $app->getUserStateFromRequest( $ns . 'filter_name', 'filter_name', '', '' );
-		$state['id'] = $this->input->post->getInt( 'id', $this->input->get->getInt( 'id' ) );
+		$state['id'] = $this->input->post->getInt( 'id', $this->input->getInt( 'id' ) );
 
 		// TODO santize the filter
 		// $state['filter']   	=
@@ -459,6 +460,10 @@ class DSCForkController extends JControllerLegacy
 	 */
 	function footer( )
 	{
+		//check if show the footer
+		$show_footer = $this->input->getBool('show_footer', $this->show_footer);		
+		if(!$show_footer) return '';
+				
 		$model = $this->getModel( 'dashboard' );
 		$view = $this->getView( 'dashboard', 'html' );
 
@@ -493,8 +498,8 @@ class DSCForkController extends JControllerLegacy
 		$msg->error = '';
 
 		// expects $element in URL and $elementTask
-		$element = $this->input->request->getString( 'element' );
-		$elementTask = $this->input->request->getString( 'elementTask' );
+		$element = $this->input->getString( 'element' );
+		$elementTask = $this->input->getString( 'elementTask' );
 
 		$msg->error = '1';
 		// $msg->message = "element: $element, elementTask: $elementTask";
@@ -535,8 +540,8 @@ class DSCForkController extends JControllerLegacy
 		$msg->message = '';
 
 		// get elements $element and $elementTask in URL
-		$element = $this->input->request->getString( 'element' );
-		$elementTask = $this->input->request->getString( 'elementTask' );
+		$element = $this->input->getString( 'element' );
+		$elementTask = $this->input->getString( 'elementTask' );
 
 		// allow $element to be in format file_name.group_name
 		$exploded = explode( '.', $element );
@@ -874,7 +879,7 @@ class DSCForkController extends JControllerLegacy
 		$model = $this->getModel( $this->get( 'suffix' ) );
 		$row = $model->getTable( );
 
-		$cids = $this->input->request->getArray( 'cid', array( 0 ) );
+		$cids = $this->input->get( 'cid', array( 0 ), 'array' );
 
 		foreach ( @$cids as $cid )
 		{
@@ -959,8 +964,8 @@ class DSCForkController extends JControllerLegacy
 		$model = $this->getModel( $this->get( 'suffix' ) );
 		$row = $model->getTable( );
 
-		$ordering = $this->input->post->getArray( 'ordering', array( 0 ) );
-		$cids = $this->input->post->getArray( 'cid', array( 0 ) );
+		$ordering = $this->input->post->get( 'ordering', array( 0 ), 'array' );
+		$cids = $this->input->post->get( 'cid', array( 0 ), 'array' );
 		foreach ( @$cids as $cid )
 		{
 			$row->load( $cid );
@@ -1015,7 +1020,7 @@ class DSCForkController extends JControllerLegacy
 		$model = $this->getModel( $this->get( 'suffix' ) );
 		$row = $model->getTable( );
 
-		$cids = $this->input->post->getArray( 'cid', array( 0 ) );
+		$cids = $this->input->post->get( 'cid', array( 0 ), 'array' );
 		$task = $this->input->getCmd( 'task' );
 		$vals = explode( '.', $task );
 

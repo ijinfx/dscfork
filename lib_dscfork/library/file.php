@@ -94,7 +94,7 @@ class DSCForkFile extends JObject
 		}
 
 		// check that upload exists
-		$userfile = JFactory::getApplication( )->input->files->getArray( $fieldname );
+		$userfile = JFactory::getApplication( )->input->files->getArray( $fieldname ); //TODO: TEST THIS IF IT WORKS
 
 		if ( !$userfile )
 		{

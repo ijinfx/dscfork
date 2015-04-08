@@ -65,7 +65,7 @@ class DSCForkHelperDiagnostics extends DSCForkHelper
 		{
 			$db = JFactory::getDBO( );
 			$db->setQuery( $definition );
-			if ( !$db->query( ) )
+			if ( !$db->execute( ) )
 			{
 				$this->setError( $db->getErrorMsg( ) );
 				return false;
@@ -117,7 +117,7 @@ class DSCForkHelperDiagnostics extends DSCForkHelper
 			{
 				$query = "ALTER TABLE `{$table}` ADD `{$field}` {$definitions[$field]}; ";
 				$database->setQuery( $query );
-				if ( !$database->query( ) )
+				if ( !$database->execute( ) )
 				{
 					$errors[] = $database->getErrorMsg( );
 				}
@@ -156,7 +156,7 @@ class DSCForkHelperDiagnostics extends DSCForkHelper
 			{
 				$query = "ALTER TABLE `{$table}` CHANGE `{$field}` `{$newnames[$field]}` {$definitions[$field]}; ";
 				$database->setQuery( $query );
-				if ( !$database->query( ) )
+				if ( !$database->execute( ) )
 				{
 					$errors[] = $database->getErrorMsg( );
 				}
@@ -194,7 +194,7 @@ class DSCForkHelperDiagnostics extends DSCForkHelper
 			{
 				$query = "ALTER TABLE `{$table}` DROP `{$field}`; ";
 				$database->setQuery( $query );
-				if ( !$database->query( ) )
+				if ( !$database->execute( ) )
 				{
 					$errors[] = $database->getErrorMsg( );
 				}

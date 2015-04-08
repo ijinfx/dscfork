@@ -162,7 +162,7 @@ if ( (is_a($modules, 'JSimpleXMLElement') || is_a( $modules, 'JXMLElement')) && 
 				$db = JFactory::getDBO();
                 $q = "UPDATE #__modules SET `position` = '{$mposition}' WHERE `module` = '{$result['element']}' AND `position` = '';";
                 $db->setQuery($q);
-				$db->query();
+				$db->execute();
 			}
 
 			$alt = JText::_( "LIB_DSCFORK_INSTALLED" );

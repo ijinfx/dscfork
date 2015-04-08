@@ -130,5 +130,95 @@ class DSCForkSelect extends JHTMLSelect
         
         return self::genericlist($list, $name, $attribs, 'value', 'text', $selected, $idtag );
     }
+	
+	/**
+     * A boolean radiolist that uses bootstrap
+     *
+     * @param unknown_type $name
+     * @param unknown_type $attribs
+     * @param unknown_type $selected
+     * @param unknown_type $yes
+     * @param unknown_type $no
+     * @param unknown_type $id
+     * @return string
+     */
+	public static function btbooleanlist($name, $attribs = null, $selected = null, $yes = 'JYES', $no = 'JNO', $id = false)
+	{
+	//	JHTML::_('script', 'dscfork/bootstrapped-advanced-ui.js', false, true); //TODO: improve js
+	    JHTML::_('stylesheet', 'dscfork/bootstrapped-advanced-ui.css', array(), true);
+	    $arr = array(JHtml::_('select.option', '0', JText::_($no)), JHtml::_('select.option', '1', JText::_($yes)));
+	    $html = '';
+	    //$html .= '<div class="control-group"><div class="controls">';
+		$html .= '<fieldset id="'.$name.'" class="radio btn-group">';
+	    $html .=  DSCForkSelect::btradiolist( $arr, $name, $attribs, 'value', 'text', (int) $selected, $id);
+	    $html .= '</fieldset>';
+	   // $html .= '</div></div>';
+	    return $html;
+	}
+
+	/**
+	 * A standard radiolist that uses bootstrap
+	 *
+	 * @param unknown_type $data
+	 * @param unknown_type $name
+	 * @param unknown_type $attribs
+	 * @param unknown_type $optKey
+	 * @param unknown_type $optText
+	 * @param unknown_type $selected
+	 * @param unknown_type $idtag
+	 * @param unknown_type $translate
+	 * @return string
+	 */
+	public static function btradiolist($data, $name, $attribs = null, $optKey = 'value', $optText = 'text', $selected = null, $idtag = false, $translate = false)
+	{
+	    reset($data);
+	    $html = '';
+
+	    if (is_array($attribs))
+	    {
+	        $attribs = JArrayHelper::__toString($attribs);
+	    }
+
+	    $id_text = $idtag ? $idtag : $name;
+
+	    foreach ($data as $obj)
+	    {
+	        $k = $obj->$optKey;
+	        $t = $translate ? JText::_($obj->$optText) : $obj->$optText;
+	        $id = (isset($obj->id) ? $obj->id : null);
+
+	        $extra = '';
+	        $extra .= $id ? ' id="' . $obj->id . '"' : '';
+	        if (is_array($selected))
+	        {
+	            foreach ($selected as $val)
+	            {
+	                $k2 = is_object($val) ? $val->$optKey : $val;
+	                if ($k == $k2)
+	                {
+	                    $extra .= ' selected="selected"';
+	                    break;
+	                }
+	            }
+	        }
+	        else
+	        {
+	            $extra .= ((string) $k == (string) $selected ? ' checked="checked"' : '');
+	        }
+
+	        $active ='';
+	        if(!empty($k)) {
+	            $active = 'active';
+	        }
+
+	        $html .= "\n\t" . '<input type="radio" name="' . $name . '"' . ' id="' . $id_text . $k . '" value="' . $k . '"' . ' ' . $extra . ' '
+	        . $attribs . '/>' . "\n\t" . '<label for="' . $id_text . $k . '"' . ' id="' . $id_text . $k . '-lbl" class="btn">' . $t
+	        . '</label>';
+	    }
+
+	    $html .= "\n";
+
+	    return $html;
+	}
 
 }

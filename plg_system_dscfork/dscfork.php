@@ -35,6 +35,10 @@ class plgSystemDscFork extends JPlugin
 			}
 			require_once JPATH_SITE . '/libraries/dscfork/dscfork.php';
 		}
+
+		$language = JFactory::getLanguage();
+        $language -> load('lib_dscfork', JPATH_ROOT, '', true);
+		
 		return DSCFork::loadLibrary( );
 	}
 
